@@ -1,6 +1,12 @@
+{{--
+    Accessibility Improvements:
+    - Added `aria-label` to the `<label>` elements to provide descriptive labels for screen readers.
+    - Added `role="alert"` to error messages to ensure immediate recognition by assistive technologies.
+    - Added `role="note"` to descriptive help text to effectively distinguish guidance content.
+--}}
 <div class="form-group row row-cols-sm-2 align-items-stretch">
     @isset($title)
-        <label for="{{$id}}" class="col-sm-3 text-wrap form-label">
+        <label for="{{$id}}" class="col-sm-3 text-wrap form-label" aria-label="{{$title}}">
             {{$title}}
 
             <x-orchid-popover :content="$popover ?? ''"/>
@@ -29,11 +35,11 @@
         @endphp
 
         @if($errors->has($oldName))
-            <div class="invalid-feedback d-block">
+            <div class="invalid-feedback d-block" role="alert">
                 <small>{{$errors->first($oldName)}}</small>
             </div>
         @elseif(isset($help))
-            <small class="form-text text-muted">{!!$help!!}</small>
+            <small class="form-text text-muted" role="note">{!!$help!!}</small>
         @endif
     </div>
 </div>

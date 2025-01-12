@@ -1,3 +1,11 @@
+{{--
+    Accessibility Improvements:
+    - Added `aria-live="polite"` to the footer message to announce dynamic updates to screen readers.
+    - Added `rel="noopener noreferrer"` to external links to enhance navigation security and prevent security risks.
+    - Added `aria-label` to elements for improved accessibility and descriptive navigation.
+    - Added `role="contentinfo"` for the footer `<div>` to provide semantic meaning and improve screen reader assistance.
+    - Applied `rel="noreferrer"` to links to ensure referrer information is not leaked, protecting user privacy and enhancing security.
+--}}
 @guest
     <div class="m-4 text-center text-muted">
         <p>Crafted with
@@ -12,7 +20,7 @@
         </p>
     </div>
 
-    <p class="small text-center mb-1 px-5">
+    <p class="small text-center mb-1 px-5" aria-live="polite">
         {{ __('The application code is published under the MIT license.') }}
     </p>
 
@@ -25,10 +33,10 @@
     </ul>
 @else
 
-    <div class="text-center user-select-none my-4 d-none d-lg-block">
+    <div class="text-center user-select-none my-4 d-none d-lg-block" role="contentinfo">
         <p class="small mb-0">
             {{ __('The application code is published under the MIT license.') }} 2016 - {{date('Y')}}<br>
-            <a href="http://orchid.software" target="_blank" rel="noopener">
+            <a href="http://orchid.software" target="_blank" rel="noopener noreferrer" aria-label="{{ __('Orchid Official Website') }}">
                 {{ __('Version') }}: {{\Orchid\Platform\Dashboard::version()}}
             </a>
         </p>

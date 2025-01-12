@@ -10,6 +10,10 @@ body {
   line-height: $line-height-base;
 }
 
+body[data-theme="dark"] :focus-visible {
+  outline: 2px solid $blue !important;  /* Lighter blue for dark theme */
+}
+
 *:focus {
   outline: 0 !important;
 }
@@ -31,6 +35,11 @@ a:hover,
 a:focus {
   color: $link-hover-color;
   text-decoration: none;
+}
+
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible, [tabindex]:focus-visible {
+  outline: 2px auto $primary !important;  /* Blue outline */
+  outline-offset: 3px !important;         /* Space between the outline and element */
 }
 
 label {
@@ -135,6 +144,14 @@ blockquote {
 .accordion-inner {
   border-color: $border-color;
   border-radius: $border-radius-base;
+}
+
+.accordion-heading:focus-visible {
+  outline: 2px solid $light;
+  background-color: $grey;
+  h6{
+    color: $light;
+  }
 }
 
 .alert {
@@ -317,15 +334,21 @@ blockquote {
         border-radius: 0;
         border-color: transparent !important;
         background: transparent !important;
-		&.active {
+		&.active,.focus-visible {
 			border-bottom-color: $primary !important;
             cursor: default;
+            outline: 2px solid $light;
+            background-color: $grey !important;
+            color: $light !important;
 		}
       }
       &.active {
         .nav-link {
           border-bottom-color: $primary !important;
         }
+      }
+      &.focus-visible{
+        box-shadow: 0 0 5px 2px $grey;
       }
     }
   }
@@ -723,4 +746,19 @@ legend {
             @extend .shadow-sm;
         }
     }
+}
+
+.skip {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip:focus-visible {
+  position: static;
+  width: auto;
+  height: auto;
 }

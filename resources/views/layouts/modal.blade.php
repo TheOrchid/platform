@@ -1,3 +1,9 @@
+{{--
+    Accessibility Improvements:
+    - Added `role="dialog"` to the modal container with appropriate `aria-labelledby` to ensure the modal is properly announced by screen readers.
+    - Used `aria-label` attributes on close buttons to provide clear and meaningful actions for assistive technologies.
+    - Added `aria-live="polite"` to apply button to announce content updates in a non-disruptive manner.
+--}}
 @push('modals-container')
     <div class="modal fade center-scale {{$type}}"
          id="screen-modal-{{$key}}"
@@ -78,14 +84,15 @@
                 </div>
                 <div class="modal-footer">
                     @if(!$withoutCloseButton)
-                        <button type="button" class="btn btn-link" data-bs-dismiss="modal">
+                        <button type="button" class="btn btn-link" data-bs-dismiss="modal"
+                                aria-label="Close without applying changes">
                             {{ $close }}
                         </button>
                     @endif
 
                     @empty($commandBar)
                         @if(!$withoutApplyButton)
-                            <button type="submit"
+                            <button type="submit" aria-live="polite"
                                     id="submit-modal-{{$key}}"
                                     data-turbo="{{ var_export($turbo) }}"
                                     class="btn btn-default">

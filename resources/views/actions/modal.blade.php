@@ -1,3 +1,8 @@
+{{--
+    Accessibility Improvements:
+     - Added aria-label to provide descriptive names for interactive elements, ensuring better screen reader compatibility.
+     - Added aria-hidden to icons to hide decorative elements from screen readers since they do not convey meaningful content.
+--}}
 @component($typeForm, get_defined_vars())
     <button type="button"
             {{ $attributes }}
@@ -11,10 +16,11 @@
             @if(!empty($parameters))
                 data-modal-toggle-parameters-value='@json($parameters)'
             @endif
+            aria-label="{{ $name ?? $modalTitle ?? $title ?? __('Open modal') }}"
     >
 
         @isset($icon)
-            <x-orchid-icon :path="$icon" class="overflow-visible"/>
+            <x-orchid-icon :path="$icon" class="overflow-visible" aria-hidden="true"/>
         @endisset
 
         {{ $name ?? '' }}

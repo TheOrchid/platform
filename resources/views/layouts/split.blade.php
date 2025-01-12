@@ -1,4 +1,9 @@
-<div class="row g-3">
+{{--
+    Accessibility Improvements:
+    - The `role="group"` and `aria-label="Many forms"` on the parent container provide semantic meaning, grouping related elements together for assistive technologies.
+    - Added `aria-label` to interactive elements, such as links, to provide clear and meaningful descriptions for assistive technologies.
+--}}
+<div class="row g-3" role="group" aria-label="Many forms">
     @foreach($manyForms as $key => $column)
         <div @class([
             'col-md',

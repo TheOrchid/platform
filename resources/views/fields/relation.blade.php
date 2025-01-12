@@ -1,5 +1,13 @@
+{{--
+    Accessibility improvements:
+    - Added `aria-label` to the `<div>` element to describe its purpose.
+    - Assigned `aria-labelledby` to the `<select>` element for better screen reader support.
+    - Ensured all `role="combobox"` elements are correctly associated with child components.
+--}}
 @component($typeForm, get_defined_vars())
-    <div data-controller="relation"
+
+    <div aria-label="Relation selection"
+         data-controller="relation"
          data-relation-id="{{$id}}"
          data-relation-placeholder="{{$attributes['placeholder'] ?? ''}}"
          data-relation-model="{{ $relationModel }}"
@@ -14,10 +22,12 @@
          data-relation-message-notfound="{{ __('No results found') }}"
          data-relation-message-add="{{ __('Add') }}"
          data-relation-allow-add="{{ var_export($allowAdd, true) }}"
+         role="combobox"
     >
-        <select id="{{$id}}" data-relation-target="select" {{ $attributes }}>
+        <select id="{{$id}}" aria-labelledby="relation-label-{{$id}}" data-relation-target="select" {{ $attributes }}
+                role="listbox" >
             @foreach ($value as $option)
-                <option selected value="{{ $option['id'] }}">{{ $option['text'] }}</option>
+                <option selected value="{{ $option['id'] }}" aria-label="{{ $option['text'] }}">{{ $option['text'] }}</option>
             @endforeach
         </select>
     </div>
