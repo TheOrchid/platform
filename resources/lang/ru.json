@@ -46,6 +46,7 @@
     "Displayed records: :from-:to of :total": "Отображено записей: :from-:to из :total",
     "Edit": "Редактировать",
     "Edit User": "Редактирование пользователя",
+    "Edit Role": "Редактирование роль",
     "Email": "Электронная почта",
     "Email address": "Адрес электронной почты",
     "Ensure your account is using a long, random password to stay secure.": "Убедитесь, что в вашей учетной записи используется длинный случайный пароль, чтобы оставаться в безопасности.",
@@ -175,5 +176,6 @@
     "Try adjusting your filter settings or removing it altogether to see more data": "Попробуйте изменить настройки фильтра или удалить их совсем, чтобы увидеть больше данных",
     "Import or create objects, or check back later for updates": "Импортируйте или создайте объекты, или проверьте обновления позже",
     "Sorting was successful.": "Сортировка прошла успешно.",
-    "Sorting failed. Please try again.": "Сортировка не удалась. Пожалуйста, попробуйте ещё раз."
+    "Sorting failed. Please try again.": "Сортировка не удалась. Пожалуйста, попробуйте ещё раз.",
+    "Modify the privileges and permissions associated with a specific role.": "Изменить привилегии и разрешения, связанные с определенной ролью."
 }
