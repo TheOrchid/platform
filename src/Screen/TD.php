@@ -35,6 +35,7 @@ class TD extends Cell
     public const FILTER_DATE_RANGE = 'dateRange';
     public const FILTER_NUMBER_RANGE = 'numberRange';
     public const FILTER_SELECT = 'select';
+    public const FILTER_SELECT_NOT_MULTIPLE = 'selectNotMultiple';
     /**
      * @var string|null|int
      */
@@ -264,11 +265,12 @@ class TD extends Cell
     protected function detectConstantFilter(string $filter): Field
     {
         $input = match ($filter) {
-            self::FILTER_DATE_RANGE   => DateRange::make()->disableMobile(),
-            self::FILTER_NUMBER_RANGE => NumberRange::make(),
-            self::FILTER_SELECT       => Select::make()->options($this->filterOptions)->multiple(),
-            self::FILTER_DATE         => DateTimer::make()->inline()->format('Y-m-d'),
-            default                   => Input::make()->type($filter),
+            self::FILTER_DATE_RANGE          => DateRange::make()->disableMobile(),
+            self::FILTER_NUMBER_RANGE        => NumberRange::make(),
+            self::FILTER_SELECT              => Select::make()->options($this->filterOptions)->multiple(),
+            self::FILTER_DATE                => DateTimer::make()->format('Y-m-d'),
+            self::FILTER_SELECT_NOT_MULTIPLE => Select::make()->options($this->filterOptions)->empty(),
+            default                          => Input::make()->type($filter),
         };
 
         return $input;
@@ -396,6 +398,6 @@ class TD extends Cell
             return implode(', ', $filter);
         }
 
-        return $filter;
+        return $this->filterOptions[$filter] ?? $filter;
     }
 }
