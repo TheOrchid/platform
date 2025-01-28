@@ -16,9 +16,9 @@ use Orchid\Attachment\MimeTypes;
 use Orchid\Filters\Filterable;
 use Orchid\Filters\Types\Like;
 use Orchid\Platform\Concerns\Sortable;
-use Orchid\Platform\Dashboard;
 use Orchid\Platform\Models\User;
 use Orchid\Screen\AsSource;
+use Orchid\Support\Facades\Dashboard;
 
 /**
  * Class Attachment.

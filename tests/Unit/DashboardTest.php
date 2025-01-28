@@ -22,7 +22,8 @@ class DashboardTest extends TestUnitCase
 
     public function testIsModelDefault(): void
     {
-        $class = Dashboard::modelClass('UnknownClass', User::class);
+        $dashboard = new Dashboard;
+        $class = $dashboard->modelClass('UnknownClass', User::class);
 
         $default = new User;
 
@@ -31,27 +32,13 @@ class DashboardTest extends TestUnitCase
 
     public function testIsModelCustomNotFound(): void
     {
-        Dashboard::useModel(User::class, 'MyCustomClass');
+        $dashboard = new Dashboard;
 
-        $user = Dashboard::modelClass(User::class);
+        $dashboard->useModel(User::class, 'MyCustomClass');
+
+        $user = $dashboard->modelClass(User::class);
 
         $this->assertEquals('MyCustomClass', $user);
-    }
-
-    public function testIsModelConfigure(): void
-    {
-        Dashboard::configure([
-            'models' => [
-                User::class => 'MyCustomClass',
-            ],
-        ]);
-
-        $class = Dashboard::model(User::class);
-        $option = Dashboard::option('models.'.User::class);
-
-        $this->assertEquals('MyCustomClass', $class);
-        $this->assertEquals('MyCustomClass', $option);
-        $this->assertEquals(null, Dashboard::option('random'));
     }
 
     public function testIsRegisterResource(): void
@@ -143,12 +130,12 @@ class DashboardTest extends TestUnitCase
     protected function setUp(): void
     {
         parent::setUp();
-        Dashboard::configure([]);
+        \Orchid\Support\Facades\Dashboard::flush();
     }
 
     protected function tearDown(): void
     {
         parent::tearDown();
-        Dashboard::configure([]);
+        \Orchid\Support\Facades\Dashboard::flush();
     }
 }

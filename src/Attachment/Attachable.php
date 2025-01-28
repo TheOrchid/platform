@@ -6,7 +6,7 @@ namespace Orchid\Attachment;
 
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Orchid\Attachment\Models\Attachment;
-use Orchid\Platform\Dashboard;
+use Orchid\Support\Facades\Dashboard;
 
 /**
  * This trait is used to relate or attach multiple files with Eloquent models.

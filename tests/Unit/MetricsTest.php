@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Orchid\Tests\Unit;
 
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 use Orchid\Metrics\GroupCollection;
 use Orchid\Platform\Models\User;
 use Orchid\Tests\TestUnitCase;
@@ -221,7 +221,7 @@ class MetricsTest extends TestUnitCase
         });
 
         /* Carbon Language */
-        \Carbon\Carbon::setLocale('ru');
+        Carbon::setLocale('ru');
 
         $period = User::sumByDays('id', $start)->showDaysOfWeek()->toChart('Users');
 
@@ -261,5 +261,12 @@ class MetricsTest extends TestUnitCase
             'labels'  => $period->pluck('label')->toArray(),
             'values'  => $period->pluck('value')->toArray(),
         ], $period->toChart('Users'));
+    }
+
+    protected function tearDown(): void
+    {
+        Carbon::setLocale('en');
+
+        parent::tearDown();
     }
 }

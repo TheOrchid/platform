@@ -18,7 +18,7 @@ use Orchid\Platform\Commands\ScreenCommand;
 use Orchid\Platform\Commands\SelectionCommand;
 use Orchid\Platform\Commands\TableCommand;
 use Orchid\Platform\Commands\TabMenuCommand;
-use Orchid\Platform\Dashboard;
+use Orchid\Support\Facades\Dashboard;
 
 class ConsoleServiceProvider extends ServiceProvider
 {

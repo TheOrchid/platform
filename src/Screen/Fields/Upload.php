@@ -6,9 +6,9 @@ namespace Orchid\Screen\Fields;
 
 use Illuminate\Support\Arr;
 use Orchid\Attachment\Models\Attachment;
-use Orchid\Platform\Dashboard;
 use Orchid\Screen\Field;
 use Orchid\Support\Assert;
+use Orchid\Support\Facades\Dashboard;
 use Orchid\Support\Init;
 
 /**

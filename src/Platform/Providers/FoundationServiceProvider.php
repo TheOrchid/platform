@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Orchid\Platform\Providers;
 
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Route;
@@ -83,7 +84,7 @@ class FoundationServiceProvider extends ServiceProvider
      */
     public function registerOctaneEventsListen(): self
     {
-        Event::listen(fn (\Laravel\Octane\Events\RequestReceived $request) => \Orchid\Support\Facades\Dashboard::flushState());
+        Event::listen(fn (\Laravel\Octane\Events\RequestReceived $request) => \Orchid\Support\Facades\Dashboard::flush());
 
         return $this;
     }
@@ -112,7 +113,15 @@ class FoundationServiceProvider extends ServiceProvider
             ->registerTranslations()
             ->registerProviders();
 
-        $this->app->singleton(Dashboard::class, static fn () => new Dashboard);
+        $this->app->bind(
+            Dashboard::class,
+            fn (Application $app) => $app->make(Dashboard::class)
+        );
+
+        $this->app->singleton(
+            Dashboard::class,
+            static fn (Application $app) => new Dashboard
+        );
 
         $this
             ->registerScreenMacro()

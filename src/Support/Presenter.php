@@ -17,7 +17,7 @@ abstract class Presenter
      *
      * @var object
      */
-    protected $entity;
+    protected object $entity;
 
     /**
      * Create a new instance of the presenter.

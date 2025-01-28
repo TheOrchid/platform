@@ -13,9 +13,9 @@ use Illuminate\Support\Str;
 use Orchid\Attachment\Contracts\Engine;
 use Orchid\Attachment\Engines\Generator;
 use Orchid\Attachment\Models\Attachment;
-use Orchid\Platform\Dashboard;
 use Orchid\Platform\Events\ReplicateFileEvent;
 use Orchid\Platform\Events\UploadFileEvent;
+use Orchid\Support\Facades\Dashboard;
 
 /**
  * This class represents an uploaded file that can be saved to the disk
