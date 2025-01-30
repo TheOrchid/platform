@@ -86,12 +86,20 @@ class Builder
     public function generateForm(): string
     {
         collect($this->fields)->each(function (Fieldable $field) {
-            $this->form .= is_subclass_of($field, Groupable::class)
-                ? $this->renderGroup($field)
-                : $this->render($field);
+            $this->form .= $this->renderFieldable($field);
         });
 
         return $this->form;
+    }
+
+    /**
+     * @throws Throwable
+     */
+    private function renderFieldable(Fieldable $field)
+    {
+        return is_subclass_of($field, Groupable::class)
+            ? $this->renderGroup($field)
+            : $this->render($field);
     }
 
     /**
@@ -102,7 +110,7 @@ class Builder
     private function renderGroup(Groupable $group)
     {
         $prepare = collect($group->getGroup())
-            ->map(fn ($field) => $this->render($field))
+            ->map(fn(Fieldable $field) => $this->renderFieldable($field))
             ->filter()
             ->toArray();
 
