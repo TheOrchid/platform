@@ -9,6 +9,7 @@ use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Support\Traits\Macroable;
 use Illuminate\View\ComponentAttributeBag;
@@ -558,5 +559,61 @@ class Field implements Fieldable, Htmlable
         $mergedClasses = array_unique(array_merge($currentClasses, $newClasses));
 
         return $this->set('class', implode(' ', array_filter($mergedClasses)));
+    }
+
+     /**
+     * Check if a css class name  already exists in the field.
+     * 
+     * @param string   $name
+     * 
+     * @return bool
+     */
+    protected function hasClass(string $name): bool
+    {        
+        $class = $this->get('class');
+
+        return  Str::contains($class, $name);        
+    }
+
+    /**
+     * Add unique classes to the field.
+     *
+     * @param string|array  $classes
+     *
+     * @return static
+     */
+    public function addClass($classes): self
+    {
+        $class = Str::of($this->get('class'))->explode(' ');
+
+        if (is_array($classes)) {
+            $class = Arr::toCssClasses(array_filter($class->merge($classes)->unique()->toArray()));
+
+        } elseif (is_string($classes)){
+            $classes = Str::of($classes)->trim()->explode(' ')->toArray();
+            $class = Arr::toCssClasses(array_filter($class->merge($classes)->unique()->toArray()));
+        }
+
+        return  $this->set('class', $class);
+    }
+
+    /**
+     * Remove the given classes from the field.
+     *
+     * @param string|array  $classes
+     *
+     * @return static
+     */
+    public function removeClass($classes) :self
+    {
+        $class = $this->get('class');
+
+        if (is_string($classes)) {
+            $classes = Arr::toCssClasses(array_filter(Str::of($classes)->trim()->explode(' ')->toArray()));
+        }
+
+        $class = Str::remove($classes, $class, false);
+
+        return $this->set('class', $class);
     }
 }
