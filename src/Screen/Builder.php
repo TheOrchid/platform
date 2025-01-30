@@ -122,8 +122,10 @@ class Builder
         $field->set('lang', $this->language);
         $field->set('prefix', $this->buildPrefix($field));
 
-        foreach ($this->fill($field->getAttributes()) as $key => $value) {
-            $field->set($key, $value);
+        if(!($field instanceof Action)) {
+            foreach ($this->fill($field->getAttributes()) as $key => $value) {
+                $field->set($key, $value);
+            }
         }
 
         return $field->render();
