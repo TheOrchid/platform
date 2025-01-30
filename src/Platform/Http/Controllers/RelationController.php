@@ -66,7 +66,7 @@ class RelationController extends Controller
     ) {
         if ($scope !== null) {
             /** @var Collection|array $model */
-            $model = $model->{$scope['name']}(...$scope['parameters']);
+            $model = $model->{$scope['name']}(...array_merge($scope['parameters'] ?? [], [$search]));
         }
 
         if (is_array($model)) {
