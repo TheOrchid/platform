@@ -81,7 +81,7 @@ class AttachmentController extends Controller
     {
         $attachment = $this->attachment
             ->findOrFail($id)
-            ->fill($request->all());
+            ->fill($request->except(['id']));
 
         $attachment->save();
 
