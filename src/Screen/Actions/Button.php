@@ -78,7 +78,7 @@ class Button extends Action
 
             $query = http_build_query($this->get('parameters'));
 
-            $action = rtrim("{$url}/{$this->get('method')}?{$query}", '/?');
+            $action = rtrim((str_ends_with($url, '/') ? $url : "{$url}/") . "{$this->get('method')}?{$query}", '/?');
             $this->set('action', $action);
         })->addBeforeRender(function () {
             $action = $this->get('action');
