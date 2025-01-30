@@ -8,6 +8,7 @@
                     ->prefix($name)
                     ->id("$idPrefix-$key-$column")
                     ->name($keyValue ? $column : "[$key][$column]")
+                    ->set('url', '')
             !!}
         </th>
 
