@@ -2,9 +2,17 @@
     @foreach($columns as $column)
 
         <th class="p-0 align-middle">
+            @php
+                $columnsArray = explode('.', $column);
+                $value= $row;
+                foreach($columnsArray as $curr) {
+                $value = $value[$curr] ?? "";
+                    if ($value == "") break;
+                }
+            @endphp
             {!!
                $fields[$column]
-                    ->value($row[$column] ?? '')
+                    ->value($value)
                     ->prefix($name)
                     ->id("$idPrefix-$key-$column")
                     ->name($keyValue ? $column : "[$key][$column]")
