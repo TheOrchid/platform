@@ -7,10 +7,12 @@ namespace Orchid\Screen\Layouts;
 use Illuminate\Contracts\Pagination\CursorPaginator;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Orchid\Screen\Layout;
 use Orchid\Screen\Repository;
 use Orchid\Screen\TD;
+use Orchid\Support\Color;
 
 abstract class Table extends Layout
 {
@@ -63,6 +65,7 @@ abstract class Table extends Layout
             'onEachSide'   => $this->onEachSide(),
             'showHeader'   => $this->hasHeader($columns, $rows),
             'title'        => $this->title,
+            'contextual'   => fn($row) => $this->contextual($row),
         ]);
     }
 
@@ -154,4 +157,13 @@ abstract class Table extends Layout
     {
         return [];
     }
+
+    /**
+     * A method that processes a string and returns the color of the string.
+    */
+    protected function contextual(Repository|Model|string $row): Color
+    {
+       return Color::DEFAULT;
+    }
+
 }

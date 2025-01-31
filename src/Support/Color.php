@@ -45,6 +45,26 @@ enum Color
     }
 
     /**
+     * This method returns the bootstrap table color class.
+     *
+     * @return string
+     */
+    public function contextualClass(): string
+    {
+        return match ($this) {
+            Color::INFO    => 'table-info',
+            Color::SUCCESS => 'table-success',
+            Color::WARNING => 'table-warning',
+            Color::BASIC, Color::DEFAULT => '',
+            Color::DANGER, Color::ERROR => 'table-danger',
+            Color::PRIMARY, Color::LINK => 'table-primary',
+            Color::SECONDARY => 'table-secondary',
+            Color::LIGHT     => 'table-light',
+            Color::DARK      => 'table-dark',
+        };
+    }
+
+    /**
      * This method returns the color based on the given name.
      * It is used to maintain backwards compatibility to 13.0.
      *
